@@ -33,6 +33,7 @@ An aggressive service and version detection scan was conducted to identify open 
 
 ```bash
 sudo nmap -sV -p 21 192.168.56.102
+```
 
 ### 🎯 Phase 2: Exploitation Setup — Metasploit Framework
 
