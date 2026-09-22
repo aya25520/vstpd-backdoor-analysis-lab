@@ -35,6 +35,9 @@ An aggressive service and version detection scan was conducted to identify open 
 sudo nmap -sV -p 21 192.168.56.102
 ```
 
+![Reconnaissance Nmap](01_Recon_Nmap.png)
+
+
 ### 🎯 Phase 2: Exploitation Setup — Metasploit Framework
 
 The vulnerability verification was automated via the Metasploit Framework using the dedicated exploit module:
@@ -56,7 +59,9 @@ The configuration validates the target parameters:
 as well as the attacker's handler coordinates:
 * LHOST: 192.168.56.101
 * LPORT
-*
+
+![Metasploit Config](02_Metasploit_Config.png)
+
 
 ### 📌 Phase 3: Exploitation & Proof of Concept (PoC)
 
@@ -73,7 +78,9 @@ uname -a
 * whoami — Confirmed the user execution context as root.
 * id — Confirmed UID 0 and GID 0.
 * uname -a — Verified the kernel and system architecture.
-*
+
+![Root Exploit PoC](03_Root_Exploit_PoC.png)
+
 
 ### 🔬 Phase 4: Network Traffic & Packet Analysis — Wireshark
 
@@ -86,6 +93,9 @@ USER 3:)
 
 #### Technical Impact
 In vulnerable builds, this specific sequence triggers the service to spawn a command-shell listener on TCP port 6200, enabling unauthenticated remote code execution.
+
+![Traffic Analysis](04_Traffic_Analysis_TCP_Stream.png)
+
 
 ### 🛡️ Phase 5: Remediation & Defensive Hardening
 
@@ -104,7 +114,7 @@ sudo iptables -L -n -v
 Deprecate cleartext protocols such as FTP and enforce encrypted alternatives such as:
 * SFTP — SSH File Transfer Protocol
 * FTPS — FTP over TLS
-*
+
 
 ### 📝 Conclusion
 
